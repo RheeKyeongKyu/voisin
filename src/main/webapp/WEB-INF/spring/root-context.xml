@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Oracle -->
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+    <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
+    <property name="username" value="voisin" />
+    <property name="password" value="voisin" />
+  </bean>
+
+  <!-- MySQL: & → ＆amp; 엔티티로 변경 -->
+<!--
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName" value="org.gjt.mm.mysql.Driver" />
+    <property name="url" value="jdbc:mysql://localhost:3306/web?useUnicode=true＆amp;characterEncoding=euckr" />
+    <property name="username" value="root" />
+    <property name="password" value="1234" />
+  </bean> 
+-->
+
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <!-- 아래부분은 매핑할 xml파일이 있는 패키지경로를 설정한다. -->
+    <property name="typeAliasesPackage" 
+                   value="dev.mvc.member, 
+                            dev.mvc.local, 
+                            dev.mvc.calendar, 
+                            dev.mvc.blog" />
+    <property name="mapperLocations" value="classpath:dev/mvc/**/*.xml" />
+  </bean>
+  
+  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+  </bean>
+		
+</beans>

@@ -1,0 +1,129 @@
+.content{
+  margin: 10px auto;
+  text-align: center;
+}
+
+.bottom{
+  margin: 10px auto;
+  text-align: center; 
+  
+}
+
+.title{
+  background-color: #CCFF33;  /* 배경 색깔 */
+  width: 40%; /* 화면 대비 % */
+  font-family: 맑은 고딕;
+  font-size: 28px;
+  text-align: center; /* 문자열 가운데 정렬 */
+  margin: 30px auto; /* px 생략 하지 말것, auto: 가운데 정렬 */
+  padding: 10px 10px;   /* 태그 경계와 내용의 간격: 위아래 좌우 */
+  font-weight: bold;  /* 진하게 강조 */
+  border-style: solid; /* 선 스타일 실선 지정*/
+  border-width: 1px; /* 선의 두께 */
+  border-color: #AAAAAA; /* 선 색깔 */
+  color: #555555; /* 글자색 */
+}
+
+/* 모든 TABLE 태그에 적용됨. */
+table{
+  margin: 0px auto;
+  border-style: solid; /* 선 스타일 실선 지정*/
+  border-width: 1px; /* 선의 두께 */
+  border-color: #AAAAAA; /* 선 색깔 */
+  border-collapse: collapse; /* TH, TD의 선을 단일선으로 병합 */ 
+}
+
+/* 특정 TABLE 태그에 적용됨. class='table' */
+.table{
+  margin: 0px auto;    /* 가운데 정렬 */
+  border-style: solid; /* 선 스타일 실선 지정*/
+  border-width: 1px; /* 선의 두께 */
+  border-color: #AAAAAA; /* 선 색깔 */
+  border-collapse: collapse; /* TH, TD의 선을 단일선으로 병합 */ 
+}
+
+
+th{
+  border-style: solid; /* 선 스타일 실선 지정*/
+  border-width: 1px; /* 선의 두께 */
+  border-color: #AAAAAA; /* 선 색깔 */  
+  font-family: 맑은 고딕;
+  font-size: 24px;
+  background-color: #668db4; /* 배경색 */
+  color: #FFFFFF;            /* 글자색 */ 
+}
+
+td{
+  border-style: solid; /* 선 스타일 실선 지정*/
+  border-width: 1px; /* 선의 두께 */
+  border-color: #AAAAAA; /* 선 색깔 */  
+  font-family: 맑은 고딕;
+  font-size: 24px;
+  text-align: center; /* 문자열 가운데 정렬 */  
+}
+
+.td{
+  border-style: solid; /* 선 스타일 실선 지정*/
+  border-width: 1px; /* 선의 두께 */
+  border-color: #AAAAAA; /* 선 색깔 */  
+  font-family: 맑은 고딕;
+  font-size: 24px;
+  text-align: left; /* 문자열 왼쪽 정렬 */  
+}
+
+
+/* 출력되는 A 태그 기본 모양 */
+a:link{ 
+  text-decoration: none; /* 밑줄 삭제 */
+  color: #000000;
+}
+
+/* A 태그에 마우스가 위치했을 때 */
+a:hover{
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #000000;
+}
+
+/* A 태그가 클릭된적이 있는 경우의 모양 */
+a:visited {
+  text-decoration: none;
+  color: #000000;
+}
+
+.calendar {
+  border-collapse: collapse;
+  border: 0px;
+  margin-top: 0px;
+  padding-top: 0px; 
+  border-top-width: 1px;    /* 태그의 위쪽선 두께*/ 
+  border-left-width: 1px;   /* 태그의 왼쪽선 두께*/
+  border-bottom-width: 1px; /* 태그의 아래쪽선 두께*/
+  border-right-width: 1px;  /* 태그의 오른쪽선 두께*/
+  border-style:solid;    /* 실선*/
+  border-color:#668db4;  /* 선의 색깔 */
+  color: #000000;        /* 제목*/ 
+  width: 100%;
+}
+ 
+.calendar_td {
+  border: 0px;
+  margin-top: 0px;
+  padding-top: 0px; 
+  border-top-width: 1px;    /* 태그의 위쪽선 두께*/ 
+  border-left-width: 1px;   /* 태그의 왼쪽선 두께*/
+  border-bottom-width: 1px; /* 태그의 아래쪽선 두께*/
+  border-right-width: 1px;  /* 태그의 오른쪽선 두께*/
+  border-style:solid;    /* 실선*/
+  border-color:#668db4;  /* 선의 색깔 */
+  color: #000000;        /* 제목*/ 
+  height: 54px;
+  text-align: center;
+}
+*{
+  font-family: 맑은 고딕;
+  font-size: 24px;
+}
+
+
+

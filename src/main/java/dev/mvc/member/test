@@ -1,0 +1,58 @@
+  /**
+   * 글과 파일 수정 처리
+   * @param blogVO
+   * @return
+   */
+  @RequestMapping(value="/blog/update.do", method=RequestMethod.POST) 
+  public ModelAndView update2(BlogVO blogVO, HttpServletRequest request){
+    ModelAndView mav = new ModelAndView();
+   
+    ArrayList<String> msgs = new ArrayList<String>();
+    ArrayList<String> links = new ArrayList<String>();
+
+    // --------------------------------------------------
+    // 파일 전송
+    // --------------------------------------------------
+    String file1="";
+    String file2="";
+    BlogVO vo = blogDAO.read(blogVO.getBlogno());
+    String upDir = Tool.getRealPath(request, "/blog/storage");
+    MultipartFile file2MF = blogVO.getFile2MF();
+// 기존에 이미지 파일이 아닌 업로드 파일이 있을 때 글만 수정하면 에러    
+      if (file2MF.getSize() > 0){ //업로드 파일이 있으면
+          Tool.deleteFile(upDir, vo.getFile2()); //기존 파일 삭제
+          file2 = Upload.saveFileSpring(file2MF, upDir); //새 파일 업로드
+          blogVO.setFile2(file2); // 전송된 파일명 저장 
+            
+            if(Tool.isImage(file2)){
+              Tool.deleteFile(upDir, vo.getFile1());
+              file1 = Tool.preview(upDir, file2, 200, 150);
+            }
+            blogVO.setFile1(file1);
+      }else{ //업로드 파일 없으면
+        if(Tool.isImage(vo.getFile2())){
+          blogVO.setFile1(vo.getFile1());
+        }else{
+          blogVO.setFile1(file1);
+        }
+        blogVO.setFile2(vo.getFile2());
+      }
+    if(vo.getFile2()==null){//기존에 업로드 파일이 없을때
+      blogVO.setFile1(file1);
+      blogVO.setFile2(file2);
+    }
+    
+    if(blogDAO.update(blogVO) == 1){
+      // 수정후 조회로 자동 이동
+      mav.setViewName("redirect:/blog/read.do?blogno=" + blogVO.getBlogno() + "&blogcategoryno=" + blogVO.getBlogcategoryno()); // 확장자 명시
+    }else{
+      msgs.add("게시판 수정에 실패 하셨습니다.");
+      links.add("<button type='button' onclick=\"history.back()\">다시 시도</button>");
+      links.add("<button type='button' onclick=\"location.href='./list2.do?blogcategoryno="+blogVO.getBlogcategoryno()+"'\">목록</button>");
+      mav.addObject("msgs", msgs);
+      mav.addObject("links", links);
+    }
+    
+    
+    return mav;
+  }

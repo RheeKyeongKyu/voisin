@@ -1,0 +1,326 @@
+/* version 10 (2016.6.28) */
+
+  *{ 
+    font-family: 맑은 고딕; 
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;  
+  }
+  
+  body{
+    width:80%;
+    margin: 0px auto;
+    background-image: url('/menu/images/back03.jpg');
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  IMG{
+    border: none;
+  }
+
+  /* 의사 클래스(pseudo-class) 를 이용한 CSS 적용 */
+  A:link{  /* 방문전 상태 */
+    color: #333333;
+    text-decoration: none; /* 밑줄 삭제 */
+  }
+
+  A:visited{  /* 방문후 상태 */
+    color: #333333;
+    text-decoration: none; /* 밑줄 삭제 */
+  }
+    
+  A:hover{  /* A 태그에 마우스가 올라간 상태 */
+    color: #5555FF;
+    text-decoration: underline; /* 밑줄 삭제 */
+  }
+  
+  A:active{  /* A 태그를 클릭한 상태 */
+    color: #5555FF;
+    text-decoration: underline; /* 밑줄 삭제 */
+
+  }
+  
+  .table{
+    border: solid 1px #999999;
+    border-collapse: collapse; /* 셀 경계선 병합 */
+    margin: 0px auto;
+    width: 100%;
+  }
+
+  .th{
+    background-color: #EEEEEE;
+    border: solid 1px #999999;
+  }
+  
+  .td{
+    border: solid 1px #999999;
+    text-align: center;
+  }
+  
+  .td_l{
+    border: solid 1px #999999;
+  }
+  
+
+  .title{
+    text-align: center;
+    border: solid 1px #AAAAAA;
+    width: 20%;
+    margin: 20px auto;
+    padding: 3px;
+    background-color: #EEEEEE;
+    
+  }
+
+  .aside_menu{ /* 서브 메뉴 */
+    width: 100%;
+    border: none;
+    margin: 20px auto;
+  }
+    
+  .content{       /* 폼 등 기본 입출력 */
+    width: 100%;
+    border: none;
+    margin: 20px auto;
+  }
+
+  .message{     /* 메시지 */
+    width: 70%;
+    border: none;
+    margin: 0px auto;
+    text-align: center;
+  padding: 10px;
+  }
+  
+   .message2{ /*popup 메세지*/
+    width: 80%;
+    border: none;
+    margin: 20px auto;
+    text-align: center;
+    padding: 3%;
+  }
+  
+  .warning{
+    color: #FFFFFF;
+    background-color: #FF0000;
+    font-weight: bold;
+  }
+
+  .info{
+    color: #FFFFFF;
+    background-color: #00AA00;
+    font-weight: bold;
+  }
+      
+  form ul li{
+    list-style: none; /* 블렛 기호 생략 */
+    margin: 10px 10px;
+  }
+
+  fieldset ul li{
+    list-style: none; /* 블렛 기호 생략 */
+    margin: 10px 10px;
+  }
+  
+  ul li{
+    list-style: none; /* 블렛 기호 생략 */
+    margin: 10px 10px;
+  }
+    
+  form fieldset legend{
+    margin: 10px 10px;
+  }
+  
+  /*
+  <FORM>
+    <FIELDSET class='top'>
+  */
+  form fieldset.top{
+    margin: 0px 10px;
+    border-top: solid 1px #555555;
+    border-right: none;
+    border-bottom: none;
+    border-left: none; 
+    
+  }
+
+  fieldset.none_line{
+    margin: 0px 10px;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: none; 
+    
+  }
+  
+  /* form input[type=text]: type이 text인 태그만 적용*/
+  form input{
+    border-top: none;
+    border-right: none;
+    border-bottom: solid 1px #AAAAAA;
+    border-left: none; 
+    
+  }
+      
+  /*
+  <FORM>
+    <FIELDSET>
+      <UL>
+        <LI class='right'>
+  */
+  form fieldset ul li.right{
+    list-style: none; /* 블렛 기호 생략 */
+    margin: 10px 30px 10px 0px; /* top right bottom left */
+    text-align: right;  
+  } 
+
+  /*
+      <UL>
+        <LI class='center'>
+  */
+  ul li.center{
+    list-style: none; /* 블렛 기호 생략 */
+    text-align: center;  
+  } 
+    
+  .bottom{
+    clear: both;
+    text-align: center;
+    margin: 30px auto;
+  }
+  
+  #top_menu{
+    width: 100%;
+    height: 150px;
+  }
+  
+  .top_menu_label{
+    position: relative; /* 부모 태그인 BODY 태그 기준 */
+    top: 0%;
+    left: 0%;
+    color: #FFFFFF;
+    
+  }
+  
+  .top_menu_list{
+    position: relative;
+    top: 60%;
+    left: 0%;
+    background-color: rgba(0, 0, 255, 0.2);    
+    color: white;
+  }
+
+  /* 의사 클래스(pseudo-class) 를 이용한 CSS 적용 */
+  .menu_link:link{
+    color: white;
+    text-decoration: none;
+  }
+
+  .menu_link:visited{  /* 방문후 상태 */
+    color: white;
+    text-decoration: none; /* 밑줄 삭제 */
+  }
+    
+  .menu_link:hover{  /* A 태그에 마우스가 올라간 상태 */
+    color: white;
+    font-weight: bold;
+    text-decoration: none; /* 밑줄 삭제 */
+  }
+  
+  .menu_link:active{  /* A 태그를 클릭한 상태 */
+    color: white;
+    text-decoration: none; /* 밑줄 삭제 */
+
+  }
+  
+  .menu_line{
+    width: 100%;
+    border-bottom: solid 1px #555555;
+    margin: 20px 0px 10px 0px;
+  }   
+  
+ .box1{
+    border: solid 1px #555555;
+    padding: 0px 3px 0px 3px; /* 시계방향 */
+    background-color: #00AA00;
+    color: #FFFFFF;
+  }
+  
+  .box1 A:link{  /* 방문전 상태 */
+    color: #FFFFFF;
+    text-decoration: none; /* 밑줄 삭제 */
+  }
+
+  .box1 A:visited{  /* 방문후 상태 */
+    color: #FFFFFF;
+    text-decoration: none; /* 밑줄 삭제 */
+  }
+    
+  .box1 A:hover{  /* A 태그에 마우스가 올라간 상태 */
+    color: #FFFFFF;
+    text-decoration: none; /* 밑줄 삭제 */
+  }
+  
+  .box1 A:active{  /* A 태그를 클릭한 상태 */
+    color: #AAAAAA;
+    text-decoration: none; /* 밑줄 삭제 */
+
+  }
+  
+  .popup1{
+    padding: 5px;
+    position: absolute;
+    top: 30%;  /* 상단 */
+    left: 35%;  /* 좌측 모서리 */
+    width: 30%;
+    height: 40%;
+    background-color: #333333;
+    opacity: 0.6;
+    text-align: center;
+    color: #FFFFFF;
+  } 
+  
+.content_menu{
+    text-align: left;
+    width: 80%;
+    margin: 30px auto 5px auto;
+  }
+  
+  /******************************************** 부트스트랩 style.css **********************************************************/
+  
+  /*
+
+bootstrap template - login-form Template
+Version: 1.0
+By: dave-cheon
+
+*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+* { font-family: 'Nanum Gothic', sans-serif; }
+
+.spaceLeft {
+  margin-left: 10px;
+}
+.spaceRight {
+  margin-right: 10px;
+}
+
+/* custom checkbox */
+.btn span.fa {
+  opacity: 0;
+}
+.btn.active span.fa {
+  opacity: 1;
+}
+  
+  
+  /*****************************************************************************************************************************/
+  
+  
+  
+  
+  

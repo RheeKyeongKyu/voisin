@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.member.MemberMapperInter"> <!-- spring과 MyBATIS를 연동하는 역할 -->
+
+  <!-- 계정 생성 -->
+  <insert id="create" parameterType="MemberVO">
+    INSERT INTO member(mno, email, passwd, name, auth, tel, zipcode, tAddress, mAddress, bAddress,
+                                  hobby, birth, gen, push, confirm, master, file1, size1, mdate, sound, mi, local_code)
+    VALUES ((SELECT NVL(MAX(mno),0)+1 as mno FROM member),
+    #{email}, #{passwd}, #{name}, #{auth}, #{tel}, #{zipcode}, #{tAddress}, #{mAddress},#{bAddress},
+    #{hobby}, #{birth}, #{gen}, #{push}, #{confirm}, #{master}, #{file1}, #{size1}, sysdate, 0, 0, #{local_code})  
+  </insert>
+  
+  <!-- 이메일 중복 검사 -->
+  <select id='checkEmail' resultType='int' parameterType='String'>
+    SELECT COUNT(email) as cnt <!-- resultType의 int와 대응 됨. -->
+    FROM member
+    WHERE email=#{email} <!-- parameter Type의 String과 대응 됨. -->
+  </select>
+  
+  <!-- 마스터 계정 검사 -->
+  <select id="checkMaster" resultType='int' parameterType='String'>
+    SELECT COUNT(mno) as cnt
+    FROM member
+    WHERE master = #{master}
+  </select>
+   
+  <!-- 관리자용 유저 목록 -->  
+    <select id="list" resultType="MemberVO" parameterType="HashMap" >
+    SELECT mno, email, name, tel, mAddress, push, confirm, master, sound, mdate, r 
+    FROM(
+             SELECT mno, email, name, tel, mAddress, push, confirm, master, sound, mdate, rownum as r
+             FROM(
+                      SELECT mno, email, name, tel, mAddress, push, confirm, master, sound, mdate
+                      FROM member
+
+                      <choose>
+                        <when test="col == 'email'">
+                           WHERE email LIKE '%' || #{word} || '%' 
+                        </when>
+                        <when test="col == 'name'">
+                           WHERE name LIKE '%' || #{word} || '%' 
+                        </when>      
+                      </choose>
+                      ORDER BY mno DESC
+             )
+    )
+    <!-- XML은 단순 문자<,>을 익식 못하여<![CDATA[]]> 를 제시하여 기재한다!!!-->
+    WHERE <![CDATA[r >=#{startNum} AND r <= #{endNum}]]>
+  </select>  
+  
+  <!-- 검색 갯수 -->
+   <select id="count" resultType="int" parameterType="HashMap" >
+    SELECT COUNT(*) as cnt
+    FROM member    
+    <choose>
+      <when test="col == 'email'">
+         WHERE email LIKE '%' || #{word} || '%' 
+      </when>
+      <when test="col == 'name'">
+         WHERE name LIKE '%' || #{word} || '%' 
+      </when>
+    </choose>
+  </select>
+    
+  <!-- 로그인 -->
+  <select id="login" resultType="int" parameterType="MemberVO">
+    SELECT COUNT(mno) as cnt
+    FROM member
+    WHERE email=#{email} AND passwd=#{passwd}
+  </select>
+  
+  <!-- mno, master, confirm 추출 -->
+  <select id="readByEmail" resultType="MemberVO" parameterType="String">
+    SELECT mno, master, confirm
+    FROM member
+    WHERE email = #{email}
+  </select>
+  
+  <!-- 인증확인 -->
+  <update id="confirm" parameterType="MemberVO">
+    UPDATE member 
+    SET  confirm='Y'
+    WHERE email=#{email} AND auth=#{auth}
+  </update> 
+  
+  <!-- 마일리지 -->
+    <update id="mileage" parameterType="String">
+    UPDATE member 
+    SET  mi=mi+1
+    WHERE email=#{email}
+  </update> 
+  
+  <!-- 조회 -->
+  <select id="read" resultType="MemberVO" parameterType="int">
+    SELECT mno, email, passwd, name, auth, tel, zipcode, tAddress, mAddress, bAddress, hobby,
+                birth, gen, push, confirm, master, file1, size1, mdate, sound, mi, local_code
+    FROM member
+    WHERE mno = #{mno}
+  </select>  
+  
+  <!-- 정보 변경 -->
+  <update id="update" parameterType="MemberVO">
+      UPDATE member
+      SET name=#{name}, tel=#{tel}, zipcode=#{zipcode}, 
+            tAddress=#{tAddress}, mAddress=#{mAddress}, bAddress=#{bAddress}, 
+            hobby=#{hobby}, birth=#{birth}, gen=#{gen}, push=#{push}, confirm=#{confirm}, 
+            master=#{master}, file1=#{file1}, size1=#{size1}, mi=#{mi}, local_code=#{local_code}
+      WHERE mno=#{mno}
+  </update> 
+  
+  <!-- 계정 삭제 -->
+  <update id="delete" parameterType="int">
+     DELETE FROM member
+     WHERE mno=#{mno}
+  </update> 
+  
+  <!-- 계정 삭제(관리자 부분에 설정) -->
+  <select id="delete_master" resultType="int" parameterType="String">
+    SELECT COUNT(email) as cnt
+    FROM member
+    WHERE email = #{email}
+  </select>
+  
+  <!-- 패스워드 변경 -->
+  <update id="passwd_update" parameterType="MemberVO">
+    UPDATE member
+    SET passwd=#{passwd}
+    WHERE mno=#{mno}
+  </update>
+  
+  <!-- 패스워드 일치여부 검사 -->
+   <select id="passwdCheck" resultType="int" parameterType="Map">
+    SELECT COUNT(mno) as cnt
+    FROM member
+    WHERE mno=#{mno} AND passwd=#{passwd}
+  </select> 
+</mapper>
